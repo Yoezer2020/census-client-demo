@@ -50,29 +50,29 @@ export default function MoveInMoveOutPage() {
     }
   };
 
-  const handleApprove = () => {
-    if (!selectedApplication) return;
+  // const handleApprove = () => {
+  //   if (!selectedApplication) return;
 
-    // Update application status in master list
-    MoveInOutApplicationService.UpdateApplicationStatus(
-      selectedApplication.id,
-      "APPROVED",
-    );
+  //   // Update application status in master list
+  //   MoveInOutApplicationService.UpdateApplicationStatus(
+  //     selectedApplication.id,
+  //     "APPROVED",
+  //   );
 
-    // Update local state
-    const updatedApp = { ...selectedApplication, status: "APPROVED" };
-    setApplications((prev) =>
-      prev.map((app) => (app.id === selectedApplication.id ? updatedApp : app)),
-    );
+  //   // Update local state
+  //   const updatedApp = { ...selectedApplication, status: "APPROVED" };
+  //   setApplications((prev) =>
+  //     prev.map((app) => (app.id === selectedApplication.id ? updatedApp : app)),
+  //   );
 
-    // Remove from approval tasks
-    setApprovalTasks((prev) =>
-      prev.filter((task) => task.application_id !== selectedApplication.id),
-    );
+  //   // Remove from approval tasks
+  //   setApprovalTasks((prev) =>
+  //     prev.filter((task) => task.application_id !== selectedApplication.id),
+  //   );
 
-    setIsDialogOpen(false);
-    toast.success("Move in/out application approved successfully!");
-  };
+  //   setIsDialogOpen(false);
+  //   toast.success("Move in/out application approved successfully!");
+  // };
 
   const handleReject = () => {
     if (!selectedApplication) return;
@@ -490,9 +490,9 @@ export default function MoveInMoveOutPage() {
                 >
                   Reject
                 </Button>
-                <AlertDialogAction onClick={handleApprove}>
+                {/* <AlertDialogAction onClick={handleApprove}>
                   Approve
-                </AlertDialogAction>
+                </AlertDialogAction> */}
               </>
             )}
           </AlertDialogFooter>
