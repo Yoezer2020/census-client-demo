@@ -144,9 +144,8 @@ export default function Step2ApplicantDetails({
       }
 
       const cidNo = session?.user?.cidNo;
-      const accessToken = session?.accessToken;
 
-      if (!cidNo || !accessToken) {
+      if (!cidNo) {
         setOperatorStatus(false);
         updateDataRef.current({ isOperatorVerified: false });
         return;
@@ -169,7 +168,7 @@ export default function Step2ApplicantDetails({
     };
 
     checkOperator();
-  }, [data.applicant_is, session?.user?.cidNo, session?.accessToken]);
+  }, [data.applicant_is, session?.user?.cidNo]);
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">

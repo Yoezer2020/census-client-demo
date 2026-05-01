@@ -47,7 +47,7 @@ export default function QuickLinks({
   // Log session data whenever component mounts or updates
   console.log("QuickLinks - Session:", {
     isAuthenticated,
-    userName: session?.user?.name,
+    userName: session?.user?.fullName,
     userEmail: session?.user?.email,
   });
 

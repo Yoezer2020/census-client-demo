@@ -20,6 +20,10 @@ interface PaymentServiceType {
   id: string;
   payment_type: string;
   amount: string;
+  currency: string;
+  service_code: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface PaymentTypeAutocompleteProps {
@@ -38,9 +42,33 @@ export default function PaymentTypeAutocomplete({
 
   // Mock payment types
   const mockPaymentTypes: PaymentServiceType[] = [
-    { id: "1", payment_type: "RELATIONSHIP_APPLICATION", amount: "100" },
-    { id: "2", payment_type: "URGENT_PROCESSING", amount: "200" },
-    { id: "3", payment_type: "INTERNATIONAL_USE", amount: "300" },
+    {
+      id: "1",
+      payment_type: "RELATIONSHIP_APPLICATION",
+      amount: "100",
+      currency: "Nu.",
+      service_code: "REL_APP",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    {
+      id: "2",
+      payment_type: "URGENT_PROCESSING",
+      amount: "200",
+      currency: "Nu.",
+      service_code: "REL_URGENT",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    {
+      id: "3",
+      payment_type: "INTERNATIONAL_USE",
+      amount: "300",
+      currency: "Nu.",
+      service_code: "REL_INTL",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
   ];
 
   useEffect(() => {

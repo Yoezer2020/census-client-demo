@@ -20,24 +20,40 @@ const mockPaymentTypes = [
   {
     id: "nat-payment-1",
     payment_type: "NATIONALITY_CERTIFICATE",
-    amount: 100,
+    amount: "100",
+    currency: "Nu.",
+    service_code: "NAT_CERT",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: "nat-payment-2",
     payment_type: "URGENT_PROCESSING",
-    amount: 200,
+    amount: "200",
+    currency: "Nu.",
+    service_code: "NAT_URGENT",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: "nat-payment-3",
     payment_type: "INTERNATIONAL_USE",
-    amount: 300,
+    amount: "300",
+    currency: "Nu.",
+    service_code: "NAT_INTL",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
 
 interface PaymentServiceType {
   id: string;
   payment_type: string;
-  amount: number;
+  amount: string;
+  currency: string;
+  service_code: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface PaymentTypeAutocompleteProps {

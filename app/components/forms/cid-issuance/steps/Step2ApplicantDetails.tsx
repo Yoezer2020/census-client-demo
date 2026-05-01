@@ -92,7 +92,7 @@ export default function Step2ApplicantDetails({
         } finally {
           setIsOperatorVerifying(false);
         }
-      } else if (data.applicantType !== "operator") {
+      } else {
         // Reset operator validation when not operator
         setIsValidOperator(null);
         onOperatorValidationChange?.(null);

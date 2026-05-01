@@ -26,8 +26,8 @@ export interface Announcement {
   id: string;
   headline: string;
   message?: string;
-  image_url?: string;
-  image_name?: string;
+  image_url?: string | null;
+  image_name?: string | null;
   category_id?: string;
   category?: {
     id: string;
@@ -59,7 +59,7 @@ export interface CmsPage {
   slug: string;
   title: string;
   body?: string;
-  featured_image_id?: string;
+  featured_image_id?: string | null;
   status: "draft" | "published";
   updated_by_id?: string;
   updated_by_name?: string;
@@ -70,7 +70,7 @@ export interface CmsPage {
     id: string;
     label: string;
   };
-  featuredImage?: MediaItem;
+  featuredImage?: MediaItem | null;
 }
 
 export interface MediaItem {
@@ -89,7 +89,7 @@ export interface NavigationItem {
   url?: string;
   icon?: string;
   order?: number;
-  message?: string;
+  message?: string | null;
   status: "active" | "inactive";
   created_by_id?: string;
   created_by_name?: string;
@@ -115,8 +115,8 @@ export interface QuickLink {
   title: string;
   description?: string;
   url?: string;
-  content_page_id?: string;
-  contentPage?: CmsPage;
+  content_page_id?: string | null;
+  contentPage?: CmsPage | null;
   category_id?: string;
   category?: QuickLinkCategory;
   type: string;

@@ -40,16 +40,42 @@ export default function CidCollectionPointAutocomplete({
 
         // Dummy collection points
         const result = [
-          { id: "1", name: "Thimphu Dzongkhag", place_of_collection: "uuid-1" },
-          { id: "2", name: "Paro Dzongkhag", place_of_collection: "uuid-2" },
-          { id: "3", name: "Punakha Dzongkhag", place_of_collection: "uuid-3" },
+          {
+            id: "1",
+            name: "Thimphu Dzongkhag",
+            place_of_collection: "uuid-1",
+            sl_no: 1,
+          },
+          {
+            id: "2",
+            name: "Paro Dzongkhag",
+            place_of_collection: "uuid-2",
+            sl_no: 2,
+          },
+          {
+            id: "3",
+            name: "Punakha Dzongkhag",
+            place_of_collection: "uuid-3",
+            sl_no: 3,
+          },
           {
             id: "4",
             name: "Bumthang Dzongkhag",
             place_of_collection: "uuid-4",
+            sl_no: 4,
           },
-          { id: "5", name: "Thimphu Thromde", place_of_collection: "uuid-5" },
-          { id: "6", name: "DoCSS HQ", place_of_collection: "uuid-6" },
+          {
+            id: "5",
+            name: "Thimphu Thromde",
+            place_of_collection: "uuid-5",
+            sl_no: 5,
+          },
+          {
+            id: "6",
+            name: "DoCSS HQ",
+            place_of_collection: "uuid-6",
+            sl_no: 6,
+          },
         ];
 
         setOptions(result);

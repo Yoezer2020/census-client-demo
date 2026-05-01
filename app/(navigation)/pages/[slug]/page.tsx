@@ -88,7 +88,7 @@ export default async function CmsPage({
     "http://localhost:5003";
 
   function resolveImageSrc(
-    img: { url?: string; file_path?: string } | undefined,
+    img: { url?: string; file_path?: string } | undefined | null,
   ): string | null {
     if (!img) return null;
     const raw = img.url || img.file_path || "";

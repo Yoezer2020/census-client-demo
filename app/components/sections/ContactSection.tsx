@@ -68,7 +68,7 @@ export default function ContactSection() {
 
   // Log session data
   console.log("ContactSection - Session:", {
-    userName: session?.user?.name,
+    userName: session?.user?.fullName,
     userEmail: session?.user?.email,
   });
 

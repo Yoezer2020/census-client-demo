@@ -33,8 +33,7 @@ export default function Step6ParentsDetails({
   // Auto-populate parent CID if applicant is FATHER or MOTHER
   useEffect(() => {
     const autoPopulateParentInfo = async () => {
-      if (!session?.accessToken || !data.applicant_cid || hasAutoPopulated)
-        return;
+      if (!data.applicant_cid || hasAutoPopulated) return;
 
       const applicantIs = data.applicant_is?.toUpperCase();
       if (applicantIs !== "FATHER" && applicantIs !== "MOTHER") return;
@@ -75,7 +74,6 @@ export default function Step6ParentsDetails({
 
     autoPopulateParentInfo();
   }, [
-    session?.accessToken,
     data.applicant_cid,
     data.applicant_is,
     data.applicant_contact_no,

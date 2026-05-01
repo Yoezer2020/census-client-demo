@@ -34,7 +34,7 @@ export default function HI2ApplicantDetails({
 
     // Primary: cidNo and fullName are properly typed in types/next-auth.d.ts
     let cid = session?.user?.cidNo || "";
-    let name = session?.user?.fullName || session?.user?.name || "";
+    let name = session?.user?.fullName || "";
     // Location fields are not in the session — read from localStorage ndi_user if present
     let village = (session?.user as any)?.village || "";
     let gewog = (session?.user as any)?.gewog || "";
@@ -70,8 +70,7 @@ export default function HI2ApplicantDetails({
   }, [status, session]);
 
   const displayCid = session?.user?.cidNo || data.cid_of_applicant || "";
-  const displayName =
-    session?.user?.fullName || session?.user?.name || data.applicant_name || "";
+  const displayName = session?.user?.fullName || data.applicant_name || "";
   const isVerified = !!displayCid;
 
   const readOnlyInput = (

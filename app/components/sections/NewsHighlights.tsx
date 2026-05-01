@@ -15,7 +15,7 @@ export default function NewsHighlights() {
 
   // Log session data
   console.log("NewsHighlights - Session:", {
-    userName: session?.user?.name,
+    userName: session?.user?.fullName,
     userEmail: session?.user?.email,
   });
 

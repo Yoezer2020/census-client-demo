@@ -24,7 +24,7 @@ export default function WebLinksButton({
   // Log session data whenever component mounts or updates
   console.log("WebLinksButton - Session:", {
     isAuthenticated,
-    userName: session?.user?.name,
+    userName: session?.user?.fullName,
     userEmail: session?.user?.email,
   });
 

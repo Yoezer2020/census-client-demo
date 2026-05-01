@@ -43,6 +43,11 @@ export interface MoveInMoveOutData {
   // Step 4 – Review & Submit
   i_agree_to_terms: boolean;
   remarks?: string;
+  supporting_document?: {
+    name: string;
+    size: number;
+    type: string;
+  };
 }
 
 export const MOVE_IN_MOVE_OUT_STEPS = [
