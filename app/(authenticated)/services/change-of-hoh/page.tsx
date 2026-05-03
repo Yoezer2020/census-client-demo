@@ -75,6 +75,36 @@ export default function ChangeOfHoHPage() {
     }
   };
 
+  const handleReject = async () => {
+    if (!selectedTask) return;
+
+    try {
+      await HohChangesService.RejectTask(selectedTask.id);
+
+      // Remove from current list
+      setApprovalTasks((prev) => prev.filter((t) => t.id !== selectedTask.id));
+
+      // Refresh applications to show updated status
+      const updatedApps = await HohChangesService.GetMyHohChangeApplications(
+        "demo-token",
+        currentUserCID,
+      );
+      setApplications(
+        Array.isArray(updatedApps)
+          ? updatedApps
+          : (updatedApps as any)?.data || [],
+      );
+
+      setIsDialogOpen(false);
+
+      // Show error/rejection message
+      toast.error("Application rejected");
+    } catch (err) {
+      console.error("Failed to reject:", err);
+      toast.error("Failed to reject application");
+    }
+  };
+
   useEffect(() => {
     if (!currentUserCID) return;
 
@@ -387,11 +417,18 @@ export default function ChangeOfHoHPage() {
             <AlertDialogCancel className="rounded-xl font-semibold">
               Cancel
             </AlertDialogCancel>
+            <Button
+              variant="destructive"
+              onClick={handleReject}
+              className="rounded-xl font-semibold"
+            >
+              Reject
+            </Button>
             <AlertDialogAction
               onClick={handleApprove}
               className="bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold"
             >
-              Approve Application
+              Approve
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

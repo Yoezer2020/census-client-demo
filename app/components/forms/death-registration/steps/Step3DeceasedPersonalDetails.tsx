@@ -102,6 +102,50 @@ export default function Step3DeceasedPersonalDetails({
           </div>
         </CardContent>
       </Card>
+
+      {/* Information Note Card */}
+      <Card className="border-blue-200 bg-blue-50">
+        <CardContent className="p-4 sm:p-6">
+          <h4 className="text-sm sm:text-base font-semibold text-blue-900 mb-3">
+            📋 Important Note - Head of Household (HoH) Requirements
+          </h4>
+          <div className="space-y-2 text-xs sm:text-sm text-blue-800">
+            <p className="flex gap-2">
+              <span className="font-semibold min-w-[1.5rem]">1.</span>
+              <span>
+                If deceased person is HoH, then system will throw{" "}
+                <strong className="text-blue-900">
+                  "Apply for change of HoH first in order to register death of
+                  this person"
+                </strong>
+              </span>
+            </p>
+            <p className="flex gap-2">
+              <span className="font-semibold min-w-[1.5rem]">2.</span>
+              <span>
+                If deceased person is HoH and is a lone member, then will be
+                allowed to apply. After admin approval, household will be
+                dissolved.
+              </span>
+            </p>
+            <p className="flex gap-2">
+              <span className="font-semibold min-w-[1.5rem]">3.</span>
+              <span>
+                If deceased person is HoH and two members in the household,
+                still be allowed to apply as default the other member will
+                become HoH, even if minor.
+              </span>
+            </p>
+            <p className="flex gap-2">
+              <span className="font-semibold min-w-[1.5rem]">4.</span>
+              <span>
+                If three or more in a household, then change of HoH must be done
+                first.
+              </span>
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

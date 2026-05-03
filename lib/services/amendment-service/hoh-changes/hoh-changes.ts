@@ -170,6 +170,20 @@ const ApproveTask = async (taskId: string): Promise<void> => {
   }
 };
 
+const RejectTask = async (taskId: string): Promise<void> => {
+  await simulateApiDelay(500);
+
+  const taskIndex = approvalTasks.findIndex((t: any) => t.id === taskId);
+  if (taskIndex !== -1) {
+    approvalTasks[taskIndex].status = "REJECTED";
+    approvalTasks[taskIndex].rejected_at = new Date().toISOString();
+
+    // Update application status to REJECTED
+    const applicationId = approvalTasks[taskIndex].application_id;
+    UpdateApplicationStatus(applicationId, "REJECTED");
+  }
+};
+
 const HohChangesService = {
   CreateHohChange,
   GetMyHohChangeApplications,
@@ -177,6 +191,7 @@ const HohChangesService = {
   UpdateApplicationStatus,
   GetMyApprovalList,
   ApproveTask,
+  RejectTask,
 };
 
 export default HohChangesService;

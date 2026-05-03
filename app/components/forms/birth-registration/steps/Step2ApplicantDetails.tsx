@@ -245,7 +245,7 @@ export default function Step2ApplicantDetails({
           <Select
             value={data.applicant_is || ""}
             onValueChange={(val) => {
-              const v = val as "FATHER" | "MOTHER" | "HOH" | "GUARDIAN";
+              const v = val as "FATHER" | "MOTHER" | "HOH";
               updateData({
                 applicant_is: v,
               });
@@ -258,7 +258,6 @@ export default function Step2ApplicantDetails({
               <SelectItem value="FATHER">Father</SelectItem>
               <SelectItem value="MOTHER">Mother</SelectItem>
               <SelectItem value="HOH">Head of Household</SelectItem>
-              <SelectItem value="GUARDIAN">Guardian</SelectItem>
               <SelectItem value="OPERATOR">Operator</SelectItem>
             </SelectContent>
           </Select>

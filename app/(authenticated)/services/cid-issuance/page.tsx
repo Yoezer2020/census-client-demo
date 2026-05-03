@@ -90,69 +90,10 @@ export default function CIDIssuancePage() {
     }
   };
 
-  const handleApprove = () => {
-    if (!selectedApplication) return;
-
-    // Update application status in master list
-    CIDIssuanceService.UpdateApplicationStatus(
-      selectedApplication.id,
-      "APPROVED",
-    );
-
-    // Update local state
-    const updatedApp = { ...selectedApplication, status: "APPROVED" };
-    setApplications((prev) =>
-      prev.map((app) => (app.id === selectedApplication.id ? updatedApp : app)),
-    );
-
-    // Remove from birth approval tasks if it exists there
-    setApprovalTasks((prev) =>
-      prev.filter((task) => task.assigned_cid !== selectedApplication.cid_no),
-    );
-
-    // Remove from CID approval tasks
-    setCidApprovalTasks((prev) =>
-      prev.filter((task) => task.assigned_cid !== selectedApplication.cid_no),
-    );
-
-    setIsDialogOpen(false);
-    toast.success("CID application approved successfully!");
-  };
-
-  const handleReject = () => {
-    if (!selectedApplication) return;
-
-    // Update application status in master list
-    CIDIssuanceService.UpdateApplicationStatus(
-      selectedApplication.id,
-      "REJECTED",
-    );
-
-    // Update local state
-    const updatedApp = { ...selectedApplication, status: "REJECTED" };
-    setApplications((prev) =>
-      prev.map((app) => (app.id === selectedApplication.id ? updatedApp : app)),
-    );
-
-    // Remove from birth approval tasks if it exists there
-    setApprovalTasks((prev) =>
-      prev.filter((task) => task.assigned_cid !== selectedApplication.cid_no),
-    );
-
-    // Remove from CID approval tasks
-    setCidApprovalTasks((prev) =>
-      prev.filter((task) => task.assigned_cid !== selectedApplication.cid_no),
-    );
-
-    setIsDialogOpen(false);
-    toast.error("CID application rejected");
-  };
-
   useEffect(() => {
     if (!session?.user?.cidNo) return;
 
-    // Seed test data for demo purposes
-    CIDIssuanceService.SeedTestData();
+    // Applications will only appear after user submits through the form
 
     setLoadingApps(true);
     CIDIssuanceService.getMyCidIssuanceApplications(
@@ -542,21 +483,12 @@ export default function CIDIssuancePage() {
           )}
 
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            {selectedApplication?.status === "SUBMITTED" && (
-              <>
-                <Button
-                  variant="destructive"
-                  onClick={handleReject}
-                  className="mr-2"
-                >
-                  Reject
-                </Button>
-                <AlertDialogAction onClick={handleApprove}>
-                  Approve
-                </AlertDialogAction>
-              </>
-            )}
+            <Button
+              onClick={() => setIsDialogOpen(false)}
+              className="w-full sm:w-auto"
+            >
+              Close
+            </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

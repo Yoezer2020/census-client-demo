@@ -167,6 +167,7 @@ export default function LoginPage() {
                   <ul className="space-y-0.5 list-disc list-inside">
                     <li>Approve birth applications</li>
                     <li>Approve Change of HoH requests</li>
+                    <li>Approve Move In/Out HoH relieving</li>
                     <li>
                       CID: <span className="font-semibold">Replacement</span>{" "}
                       (Nu. 300)

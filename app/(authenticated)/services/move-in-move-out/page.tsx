@@ -50,29 +50,29 @@ export default function MoveInMoveOutPage() {
     }
   };
 
-  // const handleApprove = () => {
-  //   if (!selectedApplication) return;
+  const handleApprove = () => {
+    if (!selectedApplication) return;
 
-  //   // Update application status in master list
-  //   MoveInOutApplicationService.UpdateApplicationStatus(
-  //     selectedApplication.id,
-  //     "APPROVED",
-  //   );
+    // Update application status in master list
+    MoveInOutApplicationService.UpdateApplicationStatus(
+      selectedApplication.id,
+      "APPROVED",
+    );
 
-  //   // Update local state
-  //   const updatedApp = { ...selectedApplication, status: "APPROVED" };
-  //   setApplications((prev) =>
-  //     prev.map((app) => (app.id === selectedApplication.id ? updatedApp : app)),
-  //   );
+    // Update local state
+    const updatedApp = { ...selectedApplication, status: "APPROVED" };
+    setApplications((prev) =>
+      prev.map((app) => (app.id === selectedApplication.id ? updatedApp : app)),
+    );
 
-  //   // Remove from approval tasks
-  //   setApprovalTasks((prev) =>
-  //     prev.filter((task) => task.application_id !== selectedApplication.id),
-  //   );
+    // Remove from approval tasks
+    setApprovalTasks((prev) =>
+      prev.filter((task) => task.application_id !== selectedApplication.id),
+    );
 
-  //   setIsDialogOpen(false);
-  //   toast.success("Move in/out application approved successfully!");
-  // };
+    setIsDialogOpen(false);
+    toast.success("Move in/out application approved successfully!");
+  };
 
   const handleReject = () => {
     if (!selectedApplication) return;
@@ -101,7 +101,7 @@ export default function MoveInMoveOutPage() {
   useEffect(() => {
     if (!session?.user?.cidNo) return;
 
-    // Note: SeedTestData removed - table starts empty until applications are submitted
+    // Note: Seed data is initialized in the service - Father will see pending HoH approval
 
     setLoadingApps(true);
     MoveInOutApplicationService.getMyMoveInOutApplications(
@@ -236,23 +236,26 @@ export default function MoveInMoveOutPage() {
         <div className="space-y-3">
           <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
             Pending Actions
+            <span className="ml-2 text-sm font-normal text-gray-500">
+              (Household Member Approvals)
+            </span>
           </h2>
 
           <div className="overflow-x-auto border border-gray-100 rounded-xl">
-            <table className="w-full min-w-[640px] text-sm">
+            <table className="w-full min-w-[800px] text-sm">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="text-left px-4 py-3 font-semibold text-gray-700">
-                    Household No.
+                    Application No.
                   </th>
                   <th className="text-left px-4 py-3 font-semibold text-gray-700">
-                    CID
+                    Task Type
                   </th>
                   <th className="text-left px-4 py-3 font-semibold text-gray-700">
-                    Name
+                    Applicant
                   </th>
                   <th className="text-left px-4 py-3 font-semibold text-gray-700">
-                    Relation
+                    Move Details
                   </th>
                   <th className="text-left px-4 py-3 font-semibold text-gray-700">
                     Status
@@ -284,15 +287,50 @@ export default function MoveInMoveOutPage() {
                 ) : (
                   approvalTasks.map((task) => (
                     <tr key={task.id} className="border-t border-gray-100">
-                      <td className="px-4 py-3 text-gray-900 font-mono text-xs">
-                        {task.household_no}
+                      <td className="px-4 py-3 text-gray-500 font-mono text-xs">
+                        {task.application_no || "N/A"}
                       </td>
-                      <td className="px-4 py-3 text-gray-700 font-mono text-xs">
-                        {task.cid}
+                      <td className="px-4 py-3 text-gray-900">
+                        <div>
+                          <p className="font-semibold">
+                            {task.task_type?.replace(/_/g, " ") ||
+                              task.relation}
+                          </p>
+                          {task.task_description && (
+                            <p className="text-xs text-gray-500 mt-0.5">
+                              {task.task_description}
+                            </p>
+                          )}
+                        </div>
                       </td>
-                      <td className="px-4 py-3 text-gray-900">{task.name}</td>
-                      <td className="px-4 py-3 text-gray-700">
-                        {task.relation}
+                      <td className="px-4 py-3">
+                        <div>
+                          <p className="text-gray-900 font-medium">
+                            {task.applicant_name || task.name}
+                          </p>
+                          <p className="text-xs text-gray-500 font-mono">
+                            {task.applicant_cid || task.cid}
+                          </p>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        {task.move_from && task.move_to ? (
+                          <div className="text-xs">
+                            <p className="text-gray-500">
+                              <span className="font-semibold">From:</span>{" "}
+                              {task.move_from}
+                            </p>
+                            <p className="text-gray-500 mt-1">
+                              <span className="font-semibold">To:</span>{" "}
+                              {task.move_to}
+                            </p>
+                            <p className="text-gray-700 mt-1 font-medium">
+                              Type: {task.move_type}
+                            </p>
+                          </div>
+                        ) : (
+                          <span className="text-gray-400">N/A</span>
+                        )}
                       </td>
                       <td className="px-4 py-3">
                         <span
@@ -352,7 +390,7 @@ export default function MoveInMoveOutPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <p className="text-gray-500 text-xs">Application No</p>
-                    <p className="text-gray-900 font-medium">
+                    <p className="text-gray-900 font-medium font-mono">
                       {selectedApplication.application_no}
                     </p>
                   </div>
@@ -416,10 +454,28 @@ export default function MoveInMoveOutPage() {
                     <p className="text-gray-500 text-xs">
                       Current Household No
                     </p>
-                    <p className="text-gray-900 font-medium">
+                    <p className="text-gray-900 font-medium font-mono">
                       {selectedApplication.currentHouseholdNo}
                     </p>
                   </div>
+                  {selectedApplication.currentHohCidNo && (
+                    <div>
+                      <p className="text-gray-500 text-xs">Current HoH CID</p>
+                      <p className="text-gray-900 font-medium font-mono">
+                        {selectedApplication.currentHohCidNo}
+                      </p>
+                    </div>
+                  )}
+                  {selectedApplication.willBecomeHoh && (
+                    <div className="col-span-2">
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                        <p className="text-xs text-blue-800 font-medium">
+                          ℹ️ Applicant will become Head of Household at new
+                          location
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -476,25 +532,48 @@ export default function MoveInMoveOutPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Approval Note for HoH */}
+              {selectedApplication.currentHohCidNo === session?.user?.cidNo && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <p className="text-sm text-amber-900 font-semibold mb-2">
+                    🔔 Head of Household Approval Required
+                  </p>
+                  <p className="text-xs text-amber-800 leading-relaxed">
+                    As the current Head of Household, your approval is required
+                    for this household member to move out. By approving, you
+                    acknowledge that{" "}
+                    <strong>{selectedApplication.applicantName}</strong> will be
+                    relieved from your household (
+                    {selectedApplication.currentHouseholdNo}) and{" "}
+                    {selectedApplication.willBecomeHoh
+                      ? "will establish a new household"
+                      : "will join another household"}{" "}
+                    in {selectedApplication.moveInVillage},{" "}
+                    {selectedApplication.moveInDzongkhag}.
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            {selectedApplication?.status === "SUBMITTED" && (
-              <>
-                <Button
-                  variant="destructive"
-                  onClick={handleReject}
-                  className="mr-2"
-                >
-                  Reject
-                </Button>
-                {/* <AlertDialogAction onClick={handleApprove}>
-                  Approve
-                </AlertDialogAction> */}
-              </>
-            )}
+            {selectedApplication?.status === "PENDING" &&
+              selectedApplication?.currentHohCidNo === session?.user?.cidNo && (
+                <>
+                  <Button
+                    variant="destructive"
+                    onClick={handleReject}
+                    className="mr-2"
+                  >
+                    Reject
+                  </Button>
+                  <AlertDialogAction onClick={handleApprove}>
+                    Approve
+                  </AlertDialogAction>
+                </>
+              )}
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

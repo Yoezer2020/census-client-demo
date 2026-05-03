@@ -108,49 +108,67 @@ const UpdateApprovalTaskStatus = (taskId: string, status: string) => {
 
 const SeedTestData = () => {
   if (submittedApplications.length === 0) {
-    // Create a test move-in-out application
+    // Create a test move-in-out application from another household member
     const testApp = {
-      id: `mio-${Date.now()}`,
-      application_no: `MIO-2026-TEST001`,
-      applicantCidNo: "11234567890", // Mother
-      applicantName: "Pema Deki Wangmo",
-      applicantContactNo: "17123456",
-      currentHouseholdNo: "HH-001-2024",
+      id: `mio-seed-001`,
+      application_no: `MIO-2026-SEED001`,
+      applicantCidNo: "11209876543", // Different household member
+      applicantName: "Tashi Wangchuk",
+      applicantContactNo: "17987654",
+      currentHouseholdNo: "HH-2024-001",
+      currentHohCidNo: "11105001234", // Father is current HoH
       currentDzongkhagId: "1",
       currentDzongkhag: "Thimphu",
       currentGewogId: "101",
-      currentGewog: "Changzamtok",
+      currentGewog: "Chang Gewog",
+      currentChiwogId: "1",
+      currentChiwog: "Chiwog 1",
       currentVillageId: "1001",
       currentVillage: "Motithang",
       moveInDzongkhagId: "2",
       moveInDzongkhag: "Paro",
       moveInGewogId: "201",
-      moveInGewog: "Shaba",
+      moveInGewog: "Doteng Gewog",
+      moveInChiwogId: "5",
+      moveInChiwog: "Chiwog 5",
       moveInVillageId: "2001",
-      moveInVillage: "Bondey",
-      moveType: "existing_household",
-      status: "SUBMITTED",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      moveInVillage: "Satsam",
+      moveType: "new_household",
+      willBecomeHoh: true,
+      status: "PENDING",
+      createdAt: new Date("2026-04-15T10:30:00").toISOString(),
+      updatedAt: new Date("2026-04-15T10:30:00").toISOString(),
     };
 
     submittedApplications.push(testApp);
 
-    // Create approval task for father
+    // Create approval task for father (current HoH) - Relieving HoH approval
     const testTask = {
-      id: `task-${Date.now()}`,
-      household_no: "HH-001-2024",
-      cid: "11105001234", // Father
+      id: `task-seed-father-001`,
+      household_no: "HH-2024-001",
+      cid: "11105001234", // Father (current HoH)
       name: "Karma Tenzin Dorji",
-      relation: "Spouse",
+      relation: "Head of Household",
+      task_type: "RELIEVING_HOH_APPROVAL",
+      task_description:
+        "Approve member leaving household and becoming new HoH elsewhere",
       status: "PENDING",
       application_id: testApp.id,
-      created_at: new Date().toISOString(),
+      application_no: testApp.application_no,
+      applicant_name: testApp.applicantName,
+      applicant_cid: testApp.applicantCidNo,
+      move_from: `${testApp.currentVillage}, ${testApp.currentGewog}, ${testApp.currentDzongkhag}`,
+      move_to: `${testApp.moveInVillage}, ${testApp.moveInGewog}, ${testApp.moveInDzongkhag}`,
+      move_type: "New Household",
+      created_at: new Date("2026-04-15T10:30:00").toISOString(),
     };
 
     approvalTasks.push(testTask);
   }
 };
+
+// Initialize seed data on module load
+SeedTestData();
 
 const MoveInOutApplicationService = {
   createMoveInOutApplication: CreateMoveInOutApplication,
