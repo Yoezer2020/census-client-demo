@@ -16,7 +16,7 @@ const CreateMoveInOutApplication = async (
     id: `mio-${Date.now()}`,
     application_no: applicationNo,
     ...payload,
-    status: "SUBMITTED",
+    status: "PENDING",
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };

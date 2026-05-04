@@ -28,17 +28,6 @@ export default function Step3MembersOfHousehold({
   const mockHouseholdMembers = [
     {
       id: "1",
-      cid_no: "11111111111",
-      first_name: "Tashi",
-      middle_name: "",
-      last_name: "Dorji",
-      gender: "Male",
-      date_of_birth: "1990-05-15",
-      relation: "Head of Household",
-      name_in_dzongkha: "བཀྲ་ཤིས་ རྡོ་རྗེ།",
-    },
-    {
-      id: "2",
       cid_no: "22222222222",
       first_name: "Pema",
       middle_name: "",
@@ -49,7 +38,7 @@ export default function Step3MembersOfHousehold({
       name_in_dzongkha: "པདྨ་ དབང་མོ།",
     },
     {
-      id: "3",
+      id: "2",
       cid_no: "33333333333",
       first_name: "Sonam",
       middle_name: "",
@@ -60,7 +49,7 @@ export default function Step3MembersOfHousehold({
       name_in_dzongkha: "བསོད་ནམས་ རྡོ་རྗེ།",
     },
     {
-      id: "4",
+      id: "3",
       cid_no: "44444444444",
       first_name: "Deki",
       middle_name: "",

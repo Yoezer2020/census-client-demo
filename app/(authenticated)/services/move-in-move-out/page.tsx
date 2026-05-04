@@ -533,34 +533,250 @@ export default function MoveInMoveOutPage() {
                 </div>
               </div>
 
+              {/* Applicant's View - Pending Approvals */}
+              {selectedApplication.applicantCidNo === session?.user?.cidNo &&
+                (selectedApplication.status === "PENDING" ||
+                  selectedApplication.status === "SUBMITTED") && (
+                  <div className="border border-gray-200 rounded-xl p-4 bg-gradient-to-br from-blue-50/50 to-white">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                        <span className="text-lg">⏳</span>
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900">
+                          Pending Approvals
+                        </h4>
+                        <p className="text-xs text-gray-600">
+                          Awaiting action from the following approvers
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Approval Cards */}
+                    <div className="space-y-3">
+                      {/* Relieving HoH Approval */}
+                      <div className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-sm transition-shadow">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-xs font-semibold text-gray-900">
+                                Relieving HoH Approval
+                              </span>
+                              <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-800">
+                                Required
+                              </span>
+                            </div>
+                            <p className="text-xs text-gray-600 mb-2">
+                              Current household head must approve move out
+                            </p>
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center text-xs font-semibold text-blue-700">
+                                KD
+                              </div>
+                              <div>
+                                <p className="text-xs font-medium text-gray-900">
+                                  Karma Tenzin Dorji
+                                </p>
+                                <p className="text-xs text-gray-500 font-mono">
+                                  11105001234
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-200">
+                            ⏳ Pending
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Receiving HoH Approval */}
+                      {!selectedApplication.willBecomeHoh ? (
+                        <div className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-sm transition-shadow">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-xs font-semibold text-gray-900">
+                                  Receiving HoH Approval
+                                </span>
+                                <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-800">
+                                  Required
+                                </span>
+                              </div>
+                              <p className="text-xs text-gray-600 mb-2">
+                                Destination household head must approve move in
+                              </p>
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center text-xs font-semibold text-purple-700">
+                                  PW
+                                </div>
+                                <div>
+                                  <p className="text-xs font-medium text-gray-900">
+                                    Pema Wangmo
+                                  </p>
+                                  <p className="text-xs text-gray-500 font-mono">
+                                    11308765432
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-200">
+                              ⏳ Pending
+                            </span>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="bg-white border border-green-200 rounded-lg p-3">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-xs font-semibold text-gray-900">
+                                  Receiving HoH Approval
+                                </span>
+                              </div>
+                              <p className="text-xs text-gray-600 mb-2">
+                                Will establish new household as HoH
+                              </p>
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center text-xs">
+                                  ✓
+                                </div>
+                                <div>
+                                  <p className="text-xs font-medium text-gray-900">
+                                    Auto-approved
+                                  </p>
+                                  <p className="text-xs text-gray-500">
+                                    Becoming new HoH
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-green-50 text-green-700 border border-green-200">
+                              ✓ Approved
+                            </span>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Household Member 1 */}
+                      <div className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-sm transition-shadow">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-xs font-semibold text-gray-900">
+                                Household Member Verification
+                              </span>
+                              <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800">
+                                1 of 2
+                              </span>
+                            </div>
+                            <p className="text-xs text-gray-600 mb-2">
+                              Member verification and consent
+                            </p>
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center text-xs font-semibold text-indigo-700">
+                                SD
+                              </div>
+                              <div>
+                                <p className="text-xs font-medium text-gray-900">
+                                  Sonam Dorji
+                                </p>
+                                <p className="text-xs text-gray-500 font-mono">
+                                  11209876543
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-200">
+                            ⏳ Pending
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Household Member 2 */}
+                      <div className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-sm transition-shadow">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-xs font-semibold text-gray-900">
+                                Household Member Verification
+                              </span>
+                              <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800">
+                                2 of 2
+                              </span>
+                            </div>
+                            <p className="text-xs text-gray-600 mb-2">
+                              Member verification and consent
+                            </p>
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center text-xs font-semibold text-pink-700">
+                                TC
+                              </div>
+                              <div>
+                                <p className="text-xs font-medium text-gray-900">
+                                  Tashi Choden
+                                </p>
+                                <p className="text-xs text-gray-500 font-mono">
+                                  11398765432
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-200">
+                            ⏳ Pending
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Info Footer */}
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="flex items-start gap-2">
+                        <span className="text-blue-600 mt-0.5">💡</span>
+                        <p className="text-xs text-gray-600 leading-relaxed">
+                          Once all approvals are completed, your application
+                          will automatically change to{" "}
+                          <span className="font-semibold text-gray-900">
+                            SUBMITTED
+                          </span>{" "}
+                          status and proceed for final processing.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
               {/* Approval Note for HoH */}
-              {selectedApplication.currentHohCidNo === session?.user?.cidNo && (
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                  <p className="text-sm text-amber-900 font-semibold mb-2">
-                    🔔 Head of Household Approval Required
-                  </p>
-                  <p className="text-xs text-amber-800 leading-relaxed">
-                    As the current Head of Household, your approval is required
-                    for this household member to move out. By approving, you
-                    acknowledge that{" "}
-                    <strong>{selectedApplication.applicantName}</strong> will be
-                    relieved from your household (
-                    {selectedApplication.currentHouseholdNo}) and{" "}
-                    {selectedApplication.willBecomeHoh
-                      ? "will establish a new household"
-                      : "will join another household"}{" "}
-                    in {selectedApplication.moveInVillage},{" "}
-                    {selectedApplication.moveInDzongkhag}.
-                  </p>
-                </div>
-              )}
+              {selectedApplication.currentHohCidNo === session?.user?.cidNo &&
+                (selectedApplication.status === "PENDING" ||
+                  selectedApplication.status === "SUBMITTED") && (
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                    <p className="text-sm text-amber-900 font-semibold mb-2">
+                      🔔 Head of Household Approval Required
+                    </p>
+                    <p className="text-xs text-amber-800 leading-relaxed">
+                      As the current Head of Household, your approval is
+                      required for this household member to move out. By
+                      approving, you acknowledge that{" "}
+                      <strong>{selectedApplication.applicantName}</strong> will
+                      be relieved from your household (
+                      {selectedApplication.currentHouseholdNo}) and{" "}
+                      {selectedApplication.willBecomeHoh
+                        ? "will establish a new household"
+                        : "will join another household"}{" "}
+                      in {selectedApplication.moveInVillage},{" "}
+                      {selectedApplication.moveInDzongkhag}.
+                    </p>
+                  </div>
+                )}
             </div>
           )}
 
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            {selectedApplication?.status === "PENDING" &&
-              selectedApplication?.currentHohCidNo === session?.user?.cidNo && (
+            <AlertDialogCancel>Close</AlertDialogCancel>
+            {(selectedApplication?.status === "PENDING" ||
+              selectedApplication?.status === "SUBMITTED") &&
+              selectedApplication?.currentHohCidNo === session?.user?.cidNo &&
+              selectedApplication?.applicantCidNo !== session?.user?.cidNo && (
                 <>
                   <Button
                     variant="destructive"
