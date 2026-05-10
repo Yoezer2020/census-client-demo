@@ -8,6 +8,13 @@ import { Card, CardContent } from "@/app/components/ui/card";
 import { Label } from "@/app/components/ui/label";
 import { Button } from "@/app/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/app/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/app/components/ui/select";
 import { cn } from "@/lib/utils";
 import { DeathRegistrationData } from "@/lib/validations/death-registration.schema";
 
@@ -256,7 +263,7 @@ export default function Step2ApplicantDetails({
       </Card>
 
       <Input
-        label="Applicant Contact Number"
+        label="Applicant Contact Number (Bhutanese number)"
         required
         id="applicant_contact_no"
         type="text"
@@ -265,6 +272,105 @@ export default function Step2ApplicantDetails({
         onChange={(e) => updateData({ applicant_contact_no: e.target.value })}
         error={errors.applicant_contact_no}
       />
+
+      {/* Point of Application */}
+      <div className="space-y-4">
+        <h4 className="text-sm font-bold uppercase tracking-wider text-gray-700 pl-0.5">
+          Point of Application
+        </h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Dzongkhag/Dungkhag/Thromde */}
+          <div className="space-y-3">
+            <Label className="text-sm font-bold uppercase tracking-wider text-gray-400 pl-0.5">
+              Dzongkhag/Dungkhag/Thromde{" "}
+              <span className="text-destructive">*</span>
+            </Label>
+            <Select
+              value={data.point_of_application_dzongkhag || ""}
+              onValueChange={(val) =>
+                updateData({ point_of_application_dzongkhag: val })
+              }
+            >
+              <SelectTrigger className="h-10 rounded-lg">
+                <SelectValue placeholder="Select Dzongkhag/Dungkhag/Thromde" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="thimphu">Thimphu</SelectItem>
+                <SelectItem value="paro">Paro</SelectItem>
+                <SelectItem value="punakha">Punakha</SelectItem>
+                <SelectItem value="wangdue">Wangdue Phodrang</SelectItem>
+                <SelectItem value="bumthang">Bumthang</SelectItem>
+                <SelectItem value="trongsa">Trongsa</SelectItem>
+                <SelectItem value="zhemgang">Zhemgang</SelectItem>
+                <SelectItem value="trashigang">Trashigang</SelectItem>
+                <SelectItem value="mongar">Mongar</SelectItem>
+                <SelectItem value="pemagatshel">Pema Gatshel</SelectItem>
+                <SelectItem value="lhuentse">Lhuentse</SelectItem>
+                <SelectItem value="samdrupjongkhar">
+                  Samdrup Jongkhar
+                </SelectItem>
+                <SelectItem value="samtse">Samtse</SelectItem>
+                <SelectItem value="chhukha">Chhukha</SelectItem>
+                <SelectItem value="haa">Haa</SelectItem>
+                <SelectItem value="dagana">Dagana</SelectItem>
+                <SelectItem value="tsirang">Tsirang</SelectItem>
+                <SelectItem value="sarpang">Sarpang</SelectItem>
+                <SelectItem value="gasa">Gasa</SelectItem>
+                <SelectItem value="trashiyangtse">Trashi Yangtse</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.point_of_application_dzongkhag && (
+              <p className="text-destructive text-[11px] font-semibold pl-0.5">
+                {errors.point_of_application_dzongkhag}
+              </p>
+            )}
+          </div>
+
+          {/* Gewog */}
+          <div className="space-y-3">
+            <Label className="text-sm font-bold uppercase tracking-wider text-gray-400 pl-0.5">
+              Gewog <span className="text-destructive">*</span>
+            </Label>
+            <Select
+              value={data.point_of_application_gewog || ""}
+              onValueChange={(val) =>
+                updateData({ point_of_application_gewog: val })
+              }
+            >
+              <SelectTrigger className="h-10 rounded-lg">
+                <SelectValue placeholder="Select Gewog" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="chang">Chang</SelectItem>
+                <SelectItem value="kawang">Kawang</SelectItem>
+                <SelectItem value="genye">Genye</SelectItem>
+                <SelectItem value="lingzhi">Lingzhi</SelectItem>
+                <SelectItem value="mewang">Mewang</SelectItem>
+                <SelectItem value="naro">Naro</SelectItem>
+                <SelectItem value="soe">Soe</SelectItem>
+                <SelectItem value="dagala">Dagala</SelectItem>
+                <SelectItem value="mewang-thimphu">Mewang (Thimphu)</SelectItem>
+                <SelectItem value="maedwang">Maedwang</SelectItem>
+                <SelectItem value="kabisa">Kabisa</SelectItem>
+                <SelectItem value="kabji">Kabji</SelectItem>
+                <SelectItem value="lunana">Lunana</SelectItem>
+                <SelectItem value="wangchang">Wangchang</SelectItem>
+                <SelectItem value="phobji">Phobji</SelectItem>
+                <SelectItem value="athang">Athang</SelectItem>
+                <SelectItem value="bjena">Bjena</SelectItem>
+                <SelectItem value="darkar">Darkar</SelectItem>
+                <SelectItem value="kazhi">Kazhi</SelectItem>
+                <SelectItem value="phobji-wangdue">Phobji (Wangdue)</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.point_of_application_gewog && (
+              <p className="text-destructive text-[11px] font-semibold pl-0.5">
+                {errors.point_of_application_gewog}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* Applicant Type */}
       <CustomRadioGroup

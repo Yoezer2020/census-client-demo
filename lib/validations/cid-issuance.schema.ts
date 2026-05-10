@@ -17,6 +17,8 @@ export const cidIssuanceSchema = z.object({
   applicationType: z.enum(["New", "Renewal", "Replacement"]),
   applicantType: z.enum(["parent", "self", "operator"]).optional(),
   applicantPhoneNumber: z.string().optional(),
+  point_of_application_dzongkhag: z.string().optional(), // Point of application
+  point_of_application_gewog: z.string().optional(), // Point of application
   isApplyingForSelf: z.boolean().default(true),
   collectionPoint: z
     .enum(["Dzongkhag", "Thromde", "Dungkhag", "HQ"])

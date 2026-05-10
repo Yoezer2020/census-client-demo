@@ -259,6 +259,11 @@ export default function DeathRegistrationForm({
         if (!formData.applicant_contact_no)
           stepErrors.applicant_contact_no =
             "Applicant contact number is required";
+        if (!formData.point_of_application_dzongkhag)
+          stepErrors.point_of_application_dzongkhag =
+            "Please select Dzongkhag/Dungkhag/Thromde.";
+        if (!formData.point_of_application_gewog)
+          stepErrors.point_of_application_gewog = "Please select Gewog.";
         if (!formData.applicant_is)
           stepErrors.applicant_is = "Please select applicant type";
 

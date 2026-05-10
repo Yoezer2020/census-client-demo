@@ -131,6 +131,13 @@ export default function CIDIssuanceForm({
       if (!formData.applicantPhoneNumber) {
         stepErrors.applicantPhoneNumber = "Contact number is required";
       }
+      if (!formData.point_of_application_dzongkhag) {
+        stepErrors.point_of_application_dzongkhag =
+          "Please select Dzongkhag/Dungkhag/Thromde.";
+      }
+      if (!formData.point_of_application_gewog) {
+        stepErrors.point_of_application_gewog = "Please select Gewog.";
+      }
 
       // Validate CID for non-self applicants
       if (formData.applicantType !== "self") {

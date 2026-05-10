@@ -12,6 +12,8 @@ export const deathRegistrationSchema = z.object({
   applicantCID: z.string().min(11).max(11).optional(), // Auto-filled from NDI
   applicant_cid: z.string().optional(),
   applicant_contact_no: z.string().optional(),
+  point_of_application_dzongkhag: z.string().optional(), // Point of application
+  point_of_application_gewog: z.string().optional(), // Point of application
   applicant_is: z.enum(["FAMILY", "OPERATOR"]).optional(), // Added applicant type
   isOperatorVerified: z.boolean().optional(), // Operator verification status
   episId: z.string().optional(), // ePIS/MCH Number if registered

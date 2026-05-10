@@ -204,7 +204,8 @@ export default function Step2ApplicantDetails({
           htmlFor="applicant_contact_no"
           className="text-sm font-semibold text-gray-700"
         >
-          Applicant Contact No <span className="text-red-500">*</span>
+          Applicant Contact No(Bhutanese Number){" "}
+          <span className="text-red-500">*</span>
         </Label>
         <div className="relative">
           <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">

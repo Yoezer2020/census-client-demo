@@ -328,6 +328,11 @@ export default function BirthRegistrationForm({
           step1Errors.applicant_cid = "Applicant CID is required.";
         if (!formData.applicant_contact_no)
           step1Errors.applicant_contact_no = "Please enter contact number.";
+        if (!formData.point_of_application_dzongkhag)
+          step1Errors.point_of_application_dzongkhag =
+            "Please select Dzongkhag/Dungkhag/Thromde.";
+        if (!formData.point_of_application_gewog)
+          step1Errors.point_of_application_gewog = "Please enter Gewog.";
         if (!formData.applicant_is)
           step1Errors.applicant_is = "Please select an option.";
 
