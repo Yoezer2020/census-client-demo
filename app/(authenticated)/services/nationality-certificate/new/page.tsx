@@ -60,6 +60,9 @@ export default function NationalityCertificateNewPage() {
     applicant_is: "",
     applicant_cid_no: mockUserCID,
     applicant_contact_no: "",
+    point_of_application_dzongkhag: "",
+    point_of_application_gewog: "",
+    guardian_acknowledgment: false,
     minor_cid: "",
     minor_name: "",
     dob: "",
@@ -171,6 +174,20 @@ export default function NationalityCertificateNewPage() {
     } else if (!/^\d{8}$/.test(formData.applicant_contact_no)) {
       newErrors.applicant_contact_no = "Invalid contact number (8 digits)";
     }
+    if (!formData.point_of_application_dzongkhag) {
+      newErrors.point_of_application_dzongkhag =
+        "Please select Dzongkhag/Dungkhag/Thromde.";
+    }
+    if (!formData.point_of_application_gewog) {
+      newErrors.point_of_application_gewog = "Please select Gewog.";
+    }
+    if (
+      formData.applicant_is === "guardian" &&
+      !formData.guardian_acknowledgment
+    ) {
+      newErrors.guardian_acknowledgment =
+        "You must acknowledge your responsibility as a guardian.";
+    }
     if (!formData.minor_cid) {
       newErrors.minor_cid = "Minor CID is required";
     }
@@ -232,6 +249,9 @@ export default function NationalityCertificateNewPage() {
         applicant_is: "",
         applicant_cid_no: mockUserCID,
         applicant_contact_no: "",
+        point_of_application_dzongkhag: "",
+        point_of_application_gewog: "",
+        guardian_acknowledgment: false,
         minor_cid: "",
         minor_name: "",
         dob: "",
@@ -461,6 +481,193 @@ export default function NationalityCertificateNewPage() {
                     {errors.applicant_contact_no}
                   </p>
                 )}
+              </div>
+
+              {/* Guardian Acknowledgment */}
+              {formData.applicant_is === "guardian" && (
+                <div className="space-y-3">
+                  <div
+                    className={`p-4 rounded-xl border-2 transition-all ${
+                      errors.guardian_acknowledgment
+                        ? "border-red-300 bg-red-50/30"
+                        : "border-amber-200 bg-amber-50/50"
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id="guardian_acknowledgment"
+                        checked={formData.guardian_acknowledgment}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            guardian_acknowledgment: e.target.checked,
+                          });
+                          if (errors.guardian_acknowledgment) {
+                            setErrors({
+                              ...errors,
+                              guardian_acknowledgment: "",
+                            });
+                          }
+                        }}
+                        className="mt-1 size-4 rounded border-gray-300 text-primary focus:ring-primary cursor-pointer"
+                      />
+                      <label
+                        htmlFor="guardian_acknowledgment"
+                        className="text-sm font-medium text-gray-900 leading-relaxed cursor-pointer flex-1"
+                      >
+                        I acknowledge that as a guardian, I take full
+                        responsibility and ownership of the child, as the
+                        parents of the child have passed away.
+                        <span className="text-destructive ml-1">*</span>
+                      </label>
+                    </div>
+                  </div>
+                  {errors.guardian_acknowledgment && (
+                    <p className="text-destructive text-[11px] font-semibold pl-0.5">
+                      {errors.guardian_acknowledgment}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* Point of Application */}
+              <div className="space-y-4">
+                <h4 className="text-sm font-bold uppercase tracking-wider text-gray-700 pl-0.5">
+                  Point of Application
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Dzongkhag/Dungkhag/Thromde */}
+                  <div className="space-y-2">
+                    <Label className="text-sm font-bold uppercase tracking-wider text-gray-400 pl-0.5">
+                      Dzongkhag/Dungkhag/Thromde{" "}
+                      <span className="text-destructive">*</span>
+                    </Label>
+                    <Select
+                      value={formData.point_of_application_dzongkhag}
+                      onValueChange={(val) => {
+                        setFormData({
+                          ...formData,
+                          point_of_application_dzongkhag: val,
+                        });
+                        if (errors.point_of_application_dzongkhag) {
+                          setErrors({
+                            ...errors,
+                            point_of_application_dzongkhag: "",
+                          });
+                        }
+                      }}
+                    >
+                      <SelectTrigger
+                        className={`h-11 rounded-lg ${
+                          errors.point_of_application_dzongkhag
+                            ? "border-red-300 bg-red-50/30"
+                            : ""
+                        }`}
+                      >
+                        <SelectValue placeholder="Select Dzongkhag/Dungkhag/Thromde" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="thimphu">Thimphu</SelectItem>
+                        <SelectItem value="paro">Paro</SelectItem>
+                        <SelectItem value="punakha">Punakha</SelectItem>
+                        <SelectItem value="wangdue">
+                          Wangdue Phodrang
+                        </SelectItem>
+                        <SelectItem value="bumthang">Bumthang</SelectItem>
+                        <SelectItem value="trongsa">Trongsa</SelectItem>
+                        <SelectItem value="zhemgang">Zhemgang</SelectItem>
+                        <SelectItem value="trashigang">Trashigang</SelectItem>
+                        <SelectItem value="mongar">Mongar</SelectItem>
+                        <SelectItem value="pemagatshel">
+                          Pema Gatshel
+                        </SelectItem>
+                        <SelectItem value="lhuentse">Lhuentse</SelectItem>
+                        <SelectItem value="samdrupjongkhar">
+                          Samdrup Jongkhar
+                        </SelectItem>
+                        <SelectItem value="samtse">Samtse</SelectItem>
+                        <SelectItem value="chhukha">Chhukha</SelectItem>
+                        <SelectItem value="haa">Haa</SelectItem>
+                        <SelectItem value="dagana">Dagana</SelectItem>
+                        <SelectItem value="tsirang">Tsirang</SelectItem>
+                        <SelectItem value="sarpang">Sarpang</SelectItem>
+                        <SelectItem value="gasa">Gasa</SelectItem>
+                        <SelectItem value="trashiyangtse">
+                          Trashi Yangtse
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {errors.point_of_application_dzongkhag && (
+                      <p className="text-destructive text-[11px] font-semibold pl-0.5">
+                        {errors.point_of_application_dzongkhag}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Gewog */}
+                  <div className="space-y-2">
+                    <Label className="text-sm font-bold uppercase tracking-wider text-gray-400 pl-0.5">
+                      Gewog <span className="text-destructive">*</span>
+                    </Label>
+                    <Select
+                      value={formData.point_of_application_gewog}
+                      onValueChange={(val) => {
+                        setFormData({
+                          ...formData,
+                          point_of_application_gewog: val,
+                        });
+                        if (errors.point_of_application_gewog) {
+                          setErrors({
+                            ...errors,
+                            point_of_application_gewog: "",
+                          });
+                        }
+                      }}
+                    >
+                      <SelectTrigger
+                        className={`h-11 rounded-lg ${
+                          errors.point_of_application_gewog
+                            ? "border-red-300 bg-red-50/30"
+                            : ""
+                        }`}
+                      >
+                        <SelectValue placeholder="Select Gewog" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="chang">Chang</SelectItem>
+                        <SelectItem value="kawang">Kawang</SelectItem>
+                        <SelectItem value="genye">Genye</SelectItem>
+                        <SelectItem value="lingzhi">Lingzhi</SelectItem>
+                        <SelectItem value="mewang">Mewang</SelectItem>
+                        <SelectItem value="naro">Naro</SelectItem>
+                        <SelectItem value="soe">Soe</SelectItem>
+                        <SelectItem value="dagala">Dagala</SelectItem>
+                        <SelectItem value="mewang-thimphu">
+                          Mewang (Thimphu)
+                        </SelectItem>
+                        <SelectItem value="maedwang">Maedwang</SelectItem>
+                        <SelectItem value="kabisa">Kabisa</SelectItem>
+                        <SelectItem value="kabji">Kabji</SelectItem>
+                        <SelectItem value="lunana">Lunana</SelectItem>
+                        <SelectItem value="wangchang">Wangchang</SelectItem>
+                        <SelectItem value="phobji">Phobji</SelectItem>
+                        <SelectItem value="athang">Athang</SelectItem>
+                        <SelectItem value="bjena">Bjena</SelectItem>
+                        <SelectItem value="darkar">Darkar</SelectItem>
+                        <SelectItem value="kazhi">Kazhi</SelectItem>
+                        <SelectItem value="phobji-wangdue">
+                          Phobji (Wangdue)
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {errors.point_of_application_gewog && (
+                      <p className="text-destructive text-[11px] font-semibold pl-0.5">
+                        {errors.point_of_application_gewog}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
 
               {/* Divider */}

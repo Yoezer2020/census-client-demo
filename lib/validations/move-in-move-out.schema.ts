@@ -13,6 +13,8 @@ export interface MoveInMoveOutData {
   applicantCidNo: string;
   applicantName: string;
   applicantContactNo: string;
+  point_of_application_dzongkhag?: string;
+  point_of_application_gewog?: string;
   currentHouseholdNo: string;
   currentHohCidNo: string;
   currentHouseNo: string;

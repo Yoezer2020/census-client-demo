@@ -217,7 +217,8 @@ export default function Step1ApplicationDetails({
               {/* Contact Number */}
               <div className="space-y-2">
                 <Label htmlFor="applicantContactNo">
-                  Contact Number <span className="text-red-500">*</span>
+                  Contact Number (Bhutanese Number){" "}
+                  <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="applicantContactNo"
@@ -233,6 +234,125 @@ export default function Step1ApplicationDetails({
                     {errors.applicantContactNo}
                   </p>
                 )}
+              </div>
+
+              {/* Point of Application */}
+              <div className="space-y-4 pt-4 border-t">
+                <h4 className="font-semibold text-gray-900">
+                  Point of Application
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="point_of_application_dzongkhag">
+                      Dzongkhag/Dungkhag/Thromde{" "}
+                      <span className="text-red-500">*</span>
+                    </Label>
+                    <Select
+                      value={data.point_of_application_dzongkhag || ""}
+                      onValueChange={(value) =>
+                        updateData({ point_of_application_dzongkhag: value })
+                      }
+                    >
+                      <SelectTrigger
+                        className={
+                          errors.point_of_application_dzongkhag
+                            ? "border-red-500"
+                            : ""
+                        }
+                      >
+                        <SelectValue placeholder="Select Dzongkhag" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Thimphu">Thimphu</SelectItem>
+                        <SelectItem value="Paro">Paro</SelectItem>
+                        <SelectItem value="Punakha">Punakha</SelectItem>
+                        <SelectItem value="Wangdue Phodrang">
+                          Wangdue Phodrang
+                        </SelectItem>
+                        <SelectItem value="Bumthang">Bumthang</SelectItem>
+                        <SelectItem value="Trongsa">Trongsa</SelectItem>
+                        <SelectItem value="Zhemgang">Zhemgang</SelectItem>
+                        <SelectItem value="Trashigang">Trashigang</SelectItem>
+                        <SelectItem value="Mongar">Mongar</SelectItem>
+                        <SelectItem value="Pema Gatshel">
+                          Pema Gatshel
+                        </SelectItem>
+                        <SelectItem value="Lhuentse">Lhuentse</SelectItem>
+                        <SelectItem value="Samdrup Jongkhar">
+                          Samdrup Jongkhar
+                        </SelectItem>
+                        <SelectItem value="Samtse">Samtse</SelectItem>
+                        <SelectItem value="Chhukha">Chhukha</SelectItem>
+                        <SelectItem value="Haa">Haa</SelectItem>
+                        <SelectItem value="Dagana">Dagana</SelectItem>
+                        <SelectItem value="Tsirang">Tsirang</SelectItem>
+                        <SelectItem value="Sarpang">Sarpang</SelectItem>
+                        <SelectItem value="Gasa">Gasa</SelectItem>
+                        <SelectItem value="Trashi Yangtse">
+                          Trashi Yangtse
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {errors.point_of_application_dzongkhag && (
+                      <p className="text-sm text-red-500">
+                        {errors.point_of_application_dzongkhag}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="point_of_application_gewog">
+                      Gewog <span className="text-red-500">*</span>
+                    </Label>
+                    <Select
+                      value={data.point_of_application_gewog || ""}
+                      onValueChange={(value) =>
+                        updateData({ point_of_application_gewog: value })
+                      }
+                    >
+                      <SelectTrigger
+                        className={
+                          errors.point_of_application_gewog
+                            ? "border-red-500"
+                            : ""
+                        }
+                      >
+                        <SelectValue placeholder="Select Gewog" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Chang">Chang</SelectItem>
+                        <SelectItem value="Kawang">Kawang</SelectItem>
+                        <SelectItem value="Genye">Genye</SelectItem>
+                        <SelectItem value="Lingzhi">Lingzhi</SelectItem>
+                        <SelectItem value="Mewang">Mewang</SelectItem>
+                        <SelectItem value="Naro">Naro</SelectItem>
+                        <SelectItem value="Soe">Soe</SelectItem>
+                        <SelectItem value="Dagala">Dagala</SelectItem>
+                        <SelectItem value="Mewang (Thimphu)">
+                          Mewang (Thimphu)
+                        </SelectItem>
+                        <SelectItem value="Maedwang">Maedwang</SelectItem>
+                        <SelectItem value="Kabisa">Kabisa</SelectItem>
+                        <SelectItem value="Kabji">Kabji</SelectItem>
+                        <SelectItem value="Lunana">Lunana</SelectItem>
+                        <SelectItem value="Wangchang">Wangchang</SelectItem>
+                        <SelectItem value="Phobji">Phobji</SelectItem>
+                        <SelectItem value="Athang">Athang</SelectItem>
+                        <SelectItem value="Bjena">Bjena</SelectItem>
+                        <SelectItem value="Darkar">Darkar</SelectItem>
+                        <SelectItem value="Kazhi">Kazhi</SelectItem>
+                        <SelectItem value="Phobji (Wangue)">
+                          Phobji (Wangue)
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {errors.point_of_application_gewog && (
+                      <p className="text-sm text-red-500">
+                        {errors.point_of_application_gewog}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
 
               {/* Current Household Number */}

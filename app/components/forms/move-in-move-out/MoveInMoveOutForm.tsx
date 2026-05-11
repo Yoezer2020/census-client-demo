@@ -62,6 +62,8 @@ export default function MoveInMoveOutForm({
     applicantCidNo: "",
     applicantName: "",
     applicantContactNo: "",
+    point_of_application_dzongkhag: "",
+    point_of_application_gewog: "",
     currentHouseholdNo: "",
     currentHohCidNo: "",
     currentHouseNo: "",
@@ -126,6 +128,12 @@ export default function MoveInMoveOutForm({
         stepErrors.applicantCidNo = "Applicant CID is required";
       if (!formData.applicantContactNo)
         stepErrors.applicantContactNo = "Contact number is required";
+      if (!formData.point_of_application_dzongkhag)
+        stepErrors.point_of_application_dzongkhag =
+          "Point of Application Dzongkhag is required";
+      if (!formData.point_of_application_gewog)
+        stepErrors.point_of_application_gewog =
+          "Point of Application Gewog is required";
       if (!formData.currentHouseholdNo)
         stepErrors.currentHouseholdNo = "Current household number is required";
       if (!formData.currentDzongkhagId)

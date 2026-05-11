@@ -199,7 +199,7 @@ export default function Step2MoveInLandDetails({
                   htmlFor="new_household"
                   className="cursor-pointer flex-1"
                 >
-                  <div className="font-semibold">Create New Household</div>
+                  <div className="font-semibold">New Household</div>
                   <div className="text-sm text-gray-500">
                     I will be establishing a new household at the move-in
                     location

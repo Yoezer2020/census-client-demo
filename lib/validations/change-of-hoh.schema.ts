@@ -10,6 +10,8 @@ export interface ChangeOfHoHData {
   // Step 1 – Applicant Details
   applicantCidNo: string;
   applicantContactNo: string;
+  point_of_application_dzongkhag?: string; // Point of application
+  point_of_application_gewog?: string; // Point of application
   applicantIs: string;
   isOperatorVerified?: boolean; // Operator verification status
   householdNo: string;

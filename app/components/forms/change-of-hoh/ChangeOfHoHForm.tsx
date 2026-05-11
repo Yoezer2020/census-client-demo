@@ -124,6 +124,14 @@ export default function ChangeOfHoHForm({
         stepErrors.applicantIs = "You are not authorized as an operator.";
       }
 
+      if (!formData.point_of_application_dzongkhag) {
+        stepErrors.point_of_application_dzongkhag =
+          "Please select Dzongkhag/Dungkhag/Thromde.";
+      }
+      if (!formData.point_of_application_gewog) {
+        stepErrors.point_of_application_gewog = "Please select Gewog.";
+      }
+
       if (!formData.householdNo?.trim()) {
         stepErrors.householdNo = "Household number is required.";
       } else if (!formData.hohCidNo) {
